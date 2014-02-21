@@ -16,3 +16,24 @@ print("A new shooter (player) begins his roll. This is known as the come out " +
       "becomes the point number. The shooter must roll that number again before " +
       "a seven is rolled. If that happens, you win. If a seven is rolled before " +
       "the point number is rolled again, you lose. ");
+
+game_over = False;  # Boolean flag used to keep the game running
+
+shooter_roll = random.randint(1,12)       # Roll the dice
+print("\nShooter rolls: ", shooter_roll);
+
+# Player wins if the computer rolls 7 or 11
+if (shooter_roll == 7 or shooter_roll == 11):
+  game_over = True;
+  print("Congrats, you win!");
+
+# Computer wins if it rolls 2, 3 or 12
+elif (shooter_roll == 2 or shooter_roll == 3 or shooter_roll == 12):
+  game_over = True;
+  print("Sorry, you lose!");
+
+# The point number becomes the roll
+else:
+  point_number = shooter_roll;
+  print("The point number is: ", point_number);
+
