@@ -38,14 +38,18 @@ def print_man(wrong_guesses):
         print("    -|-")
         print("    / \\")
 
-def user_input():
+def user_input(letters):
     user_guess = input("\nGuess a letter: ")
-    while (len(user_guess) != 1 or not user_guess.isalpha()):
+    while ( len(user_guess) != 1
+            or not user_guess.isalpha()
+            or user_guess in letters):
 
         if (not user_guess.isalpha()):
             print("You must enter a letter as a guess. Try again.")
         elif (len(user_guess) > 1):
             print("You can only enter a 1 letter guess. Try again.")
+        elif (user_guess in letters):
+            print("You already guessed '" + user_guess + "' before.")
 
         user_guess = input("Guess a letter: ")
 
@@ -55,17 +59,21 @@ def main():
     word = list("balls")
     guess = list("")
     wrong_guesses = 0;
-    letters = {}
-
-    for num in range(97,123): # init dictionary to ASCII values from a-z
-        letters[num] = False
+    guessed_letters = list()
 
     for letter in word:
         guess += "_"
 
     while "_" in guess:
-        print("\nYour guess so far: " + "".join(guess))
-        user_guess = user_input()
+
+        if (not guessed_letters):
+            print("The word has " + str(len(word)) + " letters.")
+        else:
+            print("\nYour guess so far: " + "".join(guess))
+
+        user_guess = user_input(guessed_letters)
+        guessed_letters.append(user_guess)
+
         if user_guess in word:
             print("Good guess! The letter '" + user_guess + "' is in the word")
             for i, letter in enumerate(word):
