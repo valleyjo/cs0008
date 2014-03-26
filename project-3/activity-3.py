@@ -57,6 +57,8 @@ def user_input(letters):
 
 def main():
 
+    games_played = 0
+
     # Read the file and store the words
     words = list()
     f = open("dict.txt")
@@ -67,6 +69,12 @@ def main():
 
     # While the list has words in it keep playing
     while True:
+
+      games_played += 1
+      if games_played >= 3:
+        again = input("Do you want to continue playing? (y/n): ")
+        if (again == "n"):
+            sys.exit(0)
 
       if not words:
         print("\nNo words left! Game over!")
