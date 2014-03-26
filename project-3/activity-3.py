@@ -71,7 +71,7 @@ def main():
     while True:
 
       games_played += 1
-      if games_played > 3:
+      if games_played > 1:
         again = input("Do you want to continue playing? (y/n): ")
         if (again == "n"):
             sys.exit(0)
