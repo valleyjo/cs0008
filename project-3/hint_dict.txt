@@ -1,0 +1,5 @@
+sack, similar to a bag it stores things
+bats, you hit baseballs with them
+bases, you run these
+gloves, you catch baseballs with these
+wood, used to make baseball bats
