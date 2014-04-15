@@ -4,12 +4,7 @@
 #Date: 2/19/2014
 #Description: This program is the game of craps!
 
-import random
-
-class Dice:
-
-  def roll(): # Roll the dicendom
-    return random.randint(1,6);
+from dice import *
 
 def welcome():
   user_name = input("Enter your name: "); #Get the user's name
@@ -22,51 +17,54 @@ def welcome():
         "becomes the point number. The shooter must roll that number again before " +
         "a seven is rolled. If that happens, you win. If a seven is rolled before " +
         "the point number is rolled again, you lose. ");
-  return user_name;
+  times_played = 0
+  times_played = int(input("\nEnter the number of times the game should be played: "));
+  return user_name, times_played;
 
-user_name = welcome()
-num_times = 0;
-times_played = int(input("Enter the number of times the game should be played: "));
+def main():
+  user_name, times_played = welcome()
+  num_times = 0;
 
-while (num_times <= times_played):
-  game_over = False;  # Boolean flag used to keep the game running
+  while (num_times <= times_played):
+    game_over = False;  # Boolean flag used to keep the game running
 
-  shooter_roll = Dice.roll() + Dice.roll()
-  print("\nShooter rolls: ", shooter_roll);
+    shooter_roll = dice.roll() + dice.roll();
+    print("\nShooter rolls: ", shooter_roll);
 
-  # Player wins if the computer rolls 7 or 11
-  if (shooter_roll == 7 or shooter_roll == 11):
-    game_over = True;
-    print("Congrats, you win!");
-
-  # Computer wins if it rolls 2, 3 or 12
-  elif (shooter_roll == 2 or shooter_roll == 3 or shooter_roll == 12):
-    game_over = True;
-    print("Sorry, you lose!");
-
-  # The point number becomes the roll
-  else:
-    point_number = shooter_roll;
-    print("The point number is: ", point_number);
-
-  # While the game is not over, keep rollin'
-  while (not game_over):
-    roll = random.randint(1,12)
-
-    print("Roll: ", roll);
-
-    # If the computer rolls the point number, player wins!
-    if (roll == point_number):
+    # Player wins if the computer rolls 7 or 11
+    if (shooter_roll == 7 or shooter_roll == 11):
       game_over = True;
       print("Congrats, you win!");
 
-    # If the computer rolls 7, the computer wins!
-    if (roll == 7):
+    # Computer wins if it rolls 2, 3 or 12
+    elif (shooter_roll == 2 or shooter_roll == 3 or shooter_roll == 12):
       game_over = True;
       print("Sorry, you lose!");
 
-  num_times += 1;
+    # The point number becomes the roll
+    else:
+      point_number = shooter_roll;
+      print("The point number is: ", point_number);
 
-# Print a nice message to thank the user for playing
-print("Thanks for playing", user_name,"!");
+    # While the game is not over, keep rollin'
+    while (not game_over):
+      roll = random.randint(1,12)
 
+      print("Roll: ", roll);
+
+      # If the computer rolls the point number, player wins!
+      if (roll == point_number):
+        game_over = True;
+        print("Congrats, you win!");
+
+      # If the computer rolls 7, the computer wins!
+      if (roll == 7):
+        game_over = True;
+        print("Sorry, you lose!");
+
+    num_times += 1;
+
+  # Print a nice message to thank the user for playing
+  print("Thanks for playing", user_name,"!");
+
+main();
