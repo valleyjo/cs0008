@@ -5,6 +5,7 @@
 #Description: This program is the game of craps!
 
 from dice import *
+from valid_input import *
 
 def welcome():
   user_name = input("Enter your name: "); #Get the user's name
@@ -17,15 +18,15 @@ def welcome():
         "becomes the point number. The shooter must roll that number again before " +
         "a seven is rolled. If that happens, you win. If a seven is rolled before " +
         "the point number is rolled again, you lose. ");
-  times_played = 0
-  times_played = int(input("\nEnter the number of times the game should be played: "));
-  return user_name, times_played;
+  times_to_play = 0
+  times_to_play = valid_input.get_int("\nHow many times do you wanna play?: ");
+  return user_name, times_to_play;
 
 def main():
-  user_name, times_played = welcome()
-  num_times = 0;
+  user_name, times_to_play = welcome()
+  times_played = 0;
 
-  while (num_times <= times_played):
+  while (times_played <= times_to_play):
     game_over = False;  # Boolean flag used to keep the game running
 
     shooter_roll = dice.roll() + dice.roll();
@@ -48,7 +49,7 @@ def main():
 
     # While the game is not over, keep rollin'
     while (not game_over):
-      roll = random.randint(1,12)
+      roll = dice.roll() + dice.roll();
 
       print("Roll: ", roll);
 
@@ -62,7 +63,7 @@ def main():
         game_over = True;
         print("Sorry, you lose!");
 
-    num_times += 1;
+    times_played += 1;
 
   # Print a nice message to thank the user for playing
   print("Thanks for playing", user_name,"!");

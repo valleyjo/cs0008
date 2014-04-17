@@ -10,4 +10,3 @@ class dice:
 
   def roll(): # Roll the dice
     return random.randint(1,6);
-
